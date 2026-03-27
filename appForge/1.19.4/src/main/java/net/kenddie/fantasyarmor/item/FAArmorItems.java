@@ -9,27 +9,18 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
 public final class FAArmorItems {
-    public static final ArrayList<ArmorItem.Type> VALID_ARMOR_TYPES = new ArrayList<>(List.of(
-            ArmorItem.Type.HELMET,
-            ArmorItem.Type.CHESTPLATE,
-            ArmorItem.Type.LEGGINGS,
-            ArmorItem.Type.BOOTS
-    ));
-    // EnumEntry -> (ArmorPiece -> RegistryObject<Item> )
     public static final Map<FAArmorSet, Map<ArmorItem.Type, RegistryObject<Item>>> ARMOR_ITEMS = new HashMap<>();
 
     public static void register(IEventBus eventBus) {
         for (FAArmorSet set : FAArmorSet.values()) {
             Map<ArmorItem.Type, RegistryObject<Item>> setPieces = new HashMap<>();
 
-            for (ArmorItem.Type type : VALID_ARMOR_TYPES) {
+            for (ArmorItem.Type type : ArmorItem.Type.values()) {
                 String name = set.getName() + "_" + type.getName();
 
                 FAArmorAttributesConfig config = FAArmorConfig.ARMOR_CONFIGS.get(set.getName()).get(type.getName());
@@ -49,7 +40,6 @@ public final class FAArmorItems {
                 RegistryObject<Item> item = FAItems.ITEMS.register(name, () -> set.create(type, attributesSupplier));
                 setPieces.put(type, item);
             }
-
 
             ARMOR_ITEMS.put(set, setPieces);
         }

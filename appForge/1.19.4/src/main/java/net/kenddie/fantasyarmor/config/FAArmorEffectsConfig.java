@@ -34,7 +34,6 @@ public class FAArmorEffectsConfig {
         return Map.copyOf(result);
     }
 
-
     private final ForgeConfigSpec.ConfigValue<List<? extends String>> effectsList;
 
     static {

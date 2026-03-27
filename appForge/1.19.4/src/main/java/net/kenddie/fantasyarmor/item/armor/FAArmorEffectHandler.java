@@ -1,4 +1,4 @@
-package net.kenddie.fantasyarmor.item.armor.lib;
+package net.kenddie.fantasyarmor.item.armor;
 
 import net.kenddie.fantasyarmor.config.FAConfig;
 import net.minecraft.world.effect.MobEffect;
@@ -55,14 +55,14 @@ public class FAArmorEffectHandler {
             MobEffect effect = effectInstance.getEffect();
             MobEffectInstance existingEffect = player.getEffect(effect);
 
-            if (existingEffect == null || existingEffect.getDuration() < 100) {
+            if (existingEffect == null || existingEffect.getDuration() < FAConfig.effectsInterval) {
                 player.addEffect(new MobEffectInstance(
                     effect,
                     effectInstance.getDuration(),
                     effectInstance.getAmplifier(),
                     true,  // ambient
-                    FAConfig.showParticles,  // showParticles
-                    true    // showIcon
+                    showParticles,  // showParticles
+                    FAConfig.showEffectIcon    // showIcon
                 ));
             }
         }
